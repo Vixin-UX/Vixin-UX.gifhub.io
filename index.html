@@ -1,0 +1,1157 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Credix - Dashboard</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <style>
+    :root {
+      --morado: #4B0082;
+      --morado-claro: #9370DB;
+      --amarillo: #FFD700;
+      --gris-claro: #f8f9fa;
+    }
+
+    body {
+      font-family: 'Verdana', sans-serif;
+      background-color: var(--gris-claro);
+      margin: 0;
+      padding: 0;
+    }
+#Inicio {
+  margin-top: -10px;
+  margin-left: 30px;
+  min-width: 90%;
+
+}
+    .topbar {
+      background-color: var(--morado);
+      height: 60px;
+      width: calc(100% - 250px); /* espacio menos el sidebar */
+      color: white;
+      padding: 0 20px;
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      margin-left: 250px; /* Para evitar que el topbar se meta debajo del sidebar */
+      position: relative; /* No sticky */
+      z-index: 1001; /* Se asegura de estar sobre el contenido si es necesario */
+      
+    }
+
+    .topbar input {
+      width: 200px;
+      border-radius: 20px;
+      border: none;
+      padding: 5px 10px;
+      margin-left: 400px;
+      margin-inline: 300px;
+      margin-block-end: 2px;
+    }
+
+    .sidebar {
+      width: 250px;
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 100vh;
+      background-color: var(--morado);
+      z-index: 1000;
+      box-shadow: 10px 0px 10px rgba(51, 22, 88, 0.1);
+    }
+
+    .sidebar h2 {
+      color: #f8f9fa;
+      font-size: 25px;
+      text-align: center;
+      margin: 20px 0;
+    }
+
+    .sidebar ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .sidebar li {
+      padding: 10px 20px;
+      color: #f8f9fa;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+    h3 {
+      color: var(--morado);
+    }
+    h2 {
+      color: var(--gris-claro)
+    }
+    .sidebar li:hover,
+    .sidebar li a:hover {
+      background-color: var(--morado-claro);
+      color: white;
+      text-decoration: none;
+    }
+
+    .sidebar li a {
+      color: inherit;
+      text-decoration: none;
+      display: block;
+      width: 100%;
+    }
+
+    .main {
+      margin-left: 250px; /* espacio para la sidebar fija */
+      padding: 20px 40px;
+      max-width: calc(100% - 250px);
+      box-sizing: border-box;
+      background-color: var(--gris-claro);
+      min-height: 100vh;
+    }
+
+  
+
+ .card-welcome {
+      background-color: var(--morado);
+      color: white;
+      border-radius: 15px;
+      padding: 50px;
+      height: 240px;
+      width: 1140px;
+      margin-top: -10px;
+      margin-left: -70px;
+      text-align: center;
+      margin-bottom: 30px;
+
+    }
+
+    .dashboard-cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 20px;
+      padding: auto;
+      margin-bottom: 40px;
+      margin-left: -70px;
+      height: 150px;
+      width: 1140px;
+    }
+
+    .card {
+      background-color: white;
+      border-radius: 15px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      padding: 20px;
+      text-align: center;
+    }
+
+    .card h3 {
+      color: var(--morado);
+      margin-bottom: 10px;
+    }
+    .card h4 {
+      color: var(--amarillo);
+      margin-bottom: 10px;
+    }
+    .card p {
+      color: var(--amarillo);
+      font-size: 18px;
+    }
+
+    table {
+      width: 100%;
+      background-color: white;
+      border-radius: 15px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      margin-bottom: 30px;
+      overflow: hidden;
+    }
+
+    table th {
+      background-color: var(--morado);
+      color: white;
+      padding: 10px;
+    }
+
+    table td {
+      padding: 10px;
+      text-align: center;
+      border-top: 1px solid #ddd;
+    }
+
+    table tr:hover {
+      background-color: #f1f1f1;
+    }
+
+    .soluciones {
+      background-color: var(--morado);
+      min-width: 130%;
+      color: white;
+      padding: 40px 20px;
+      margin-left: -90px;
+      text-align: center;
+    }
+
+        .tarjetas-soluciones {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 40px;
+    
+      padding: 0 20px;
+    }
+
+    .tarjeta {
+      background-color: var(--morado-claro);
+      padding: 20px;
+      border-radius: 15px;
+      flex: 1 1 30%; 
+      margin-left: -40px;
+      max-width: 390px;
+      color: white;
+    }
+
+    .tarjeta h4 {
+      margin-bottom: 10px;
+      color: white;
+    }
+
+    .tarjeta a {
+      color: var(--amarillo);
+      text-decoration: underline;
+      font-weight: bold;
+    }
+
+    .extra-info {
+      background-color: white;
+      padding: 40px 20px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      justify-content: center;
+      
+    }
+
+    .caja-info {
+      border-radius: 15px;
+      padding: 20px;
+      width: 300px;
+      color: white;
+    }
+
+    .segura {
+      background-color: var(--morado);
+      width: 45%;
+      padding-bottom: 20px;
+      text-align: center;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+
+    }
+
+    .imagen-segura{ 
+      width: 100%;
+  height: auto;
+  max-height: 300px;
+  object-fit: cover;
+  border-radius: 10px;
+  margin-top: 10px;
+    flex: 1 1 45%;
+  max-width: 600px;
+}   
+
+     
+     
+
+    .vip {
+      background-color: var(--morado-claro);
+      width: 45%;
+      padding-bottom: 50px;
+      text-align: center;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+
+    }
+    .imagen-vip{ 
+      width: 100%;
+  height: auto;
+  max-height: 300px;
+  object-fit: cover;
+  border-radius: 10px;
+  margin-top: 10px;
+    flex: 1 1 45%;
+  max-width: 600px;
+}
+    footer {
+      background-color: var(--morado);
+      color: white;
+      padding: 40px 20px;
+      margin-top: 40px;
+      margin-left: 150px;
+    }
+
+    .footer-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 80px;
+      margin-inline: 40px;
+    }
+
+    .footer-column {
+      flex: 1;
+      min-width: 180px;
+    }
+
+    .footer-column h5 {
+      color: var(--amarillo);
+      margin-bottom: 10px;
+      text-align: center; 
+    }
+
+    .footer-column ul {
+      list-style: none;
+      padding: 0;
+      text-align: center;
+    }
+
+    .footer-column li {
+      margin-bottom: 8px;
+    }
+
+    .footer-column a {
+      color: white;
+      text-decoration: none;
+    }
+
+    .footer-column a:hover {
+      text-decoration: underline;
+      color: var(--amarillo);
+    }
+
+    .footer-bottom {
+      text-align: center;
+      margin-top: 30px;
+      font-size: 14px;
+      border-top: 1px solid rgba(255, 255, 255, 0.2);
+      padding-top: 20px;
+    }
+
+
+
+
+
+
+
+
+
+  #Solicitudes {
+  margin-top: -30px;
+  margin-left: 20px;
+  min-width: 100%;
+
+}
+    .franja-morada {
+      background-color: var(--morado);
+       margin-left: -90px;
+      min-width: 130%;
+      color: white;
+      padding: 40px 20px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-bottom: 30px;
+      border-radius: 15px;
+    }
+
+    .franja-contenido {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 20px;
+    }
+
+    .franja-contenido h1 {
+      font-size: 2.2rem;
+      font-weight: bold;
+      margin: 0;
+      text-align: center;
+    }
+
+    .franja-contenido img {
+      max-height: 180px;
+      width: auto;
+      margin-left: 0;
+    }
+
+    .prestamo-form {
+      background-color: #fff;
+      padding: 40px;
+      max-width: 600px;
+      margin: 0 auto 60px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+      border-radius: 15px;
+    }
+
+    .btn-enviar {
+      background-color: var(--morado);
+      color: white;
+      font-weight: bold;
+      margin-top: 25px;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    .btn-enviar:hover {
+      background-color: #5c1799;
+    }
+
+    .content {
+  display: none;
+  max-width: 1000px;
+  margin: auto;
+  padding: 30px 20px;
+}
+
+/* Muestra solo la sección que coincide con el enlace */
+.content:target {
+  display: block;
+}
+
+/* Si no se ha clicado ningún enlace aún, mostrar la sección #Inicio */
+body:not(:has(:target)) #Inicio {
+  display: block;
+}
+
+
+
+/*AYUDA Y CONTACTO*/
+
+/* Estilos para la sección de ayuda y contacto */
+#Ayuda {
+  background-color: var(--morado);
+  margin-top: -750px;
+  margin-left: 270px;
+  min-width: 80%;
+  border-radius: 50px;
+}
+
+.ayuda-header {
+  background-color: #3e0368;
+  border-radius: 20px;
+  padding: 10px 30px;
+  font-size: 30px;
+  font-weight: bold;
+  color: white;
+}
+
+.ayuda-titulo {
+  text-align: center;
+  padding: 20px;
+  margin: 40px 0 10px;
+  font-size: 28px;
+  color: white;
+}
+
+.ayuda-contenido {
+  display: flex;
+  justify-content: space-between;
+  padding: 0 10%;
+  gap: 40px;
+  flex-wrap: wrap;
+  margin-bottom: 80px;
+}
+
+.ayuda-tarjetas {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  min-width: 280px;
+}
+
+.ayuda-tarjeta {
+  background-color: white;
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.ayuda-tarjeta h3 {
+  margin: 0 0 10px;
+  font-size: 18px;
+  color: var(--morado-claro);
+  font-weight: 600;
+}
+
+.ayuda-tarjeta p {
+  color: #555;
+  font-size: 14px;
+  margin-bottom: 10px;
+  line-height: 1.5;
+}
+
+.ayuda-tarjeta a {
+  color: var(--morado-claro);
+  font-weight: 600;
+  font-size: 14px;
+  text-decoration: none;
+}
+
+.ayuda-faqs {
+  flex: 1;
+  min-width: 280px;
+}
+
+.ayuda-faq-box {
+  background-color: white;
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.ayuda-faq-box h4 {
+  font-size: 16px;
+  color: var(--morado-claro);
+  margin-bottom: 15px;
+  font-weight: 600;
+}
+
+.ayuda-faq-item {
+  margin-bottom: 10px;
+}
+
+.ayuda-faq-item summary {
+  font-size: 15px;
+  color: var(--morado-claro);
+  cursor: pointer;
+  font-weight: 600;
+  list-style: none;
+}
+
+
+
+.ayuda-faq-item div {
+  padding-top: 5px;
+  font-size: 14px;
+  color: #555;
+  line-height: 1.4;
+}
+
+
+
+
+/*HISTORIA*/
+
+
+
+.Historia {
+  background-color: var(--morado);
+  color: white;
+  padding: 60px 30px;
+  border-radius: 20px;
+  margin-top: -750px;
+  margin-left: 100px;
+  min-width: 1000px;
+}
+
+.credix-historia-content {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 40px;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.credix-historia-texto {
+  flex: 1 1 55%;
+}
+
+.credix-historia-texto h2 {
+  font-size: 2.8rem;
+  margin-bottom: 25px;
+  font-weight: bold;
+  text-align: center;
+  color: var(--amarillo);
+}
+
+.credix-historia-texto p {
+  text-align: justify;
+  line-height: 1.7;
+  font-size: 1rem;
+  margin-bottom: 15px;
+}
+
+.credix-historia-img {
+  flex: 1 1 40%;
+  text-align: center;
+}
+
+.credix-historia-img img {
+  width: 100%;
+  max-width: 420px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+/* Misión y visión */
+.credix-mision-vision-box {
+  background-color: white;
+  border-radius: 15px;
+  padding: 40px 30px;
+  margin-top: 60px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+}
+
+.credix-mision-vision-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 40px;
+  justify-content: space-between;
+}
+
+.credix-mision-vision-item {
+  flex: 1 1 45%;
+}
+
+.credix-mision-vision-item h3 {
+  color: var(--morado);
+  font-size: 1.5rem;
+  margin-bottom: 15px;
+  text-align: center;
+}
+
+.credix-mision-vision-item p {
+  color: #333;
+  text-align: justify;
+  font-size: 1rem;
+  line-height: 1.6;
+}
+
+/*TARJETAS DE CRÉDITO*/
+#Tarjetas {
+  background-color: var(--morado);
+  margin-top: -750px;
+  margin-left: 270px;
+  min-width: 80%;
+}
+.banda-superior {
+  background-color: var(--morado);
+  padding: 20px;
+  text-align: center;
+  margin-bottom: 10px;
+  border-radius: 15px;
+}
+
+.portada-img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 15px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+}
+
+.tarjetas-wrapper {
+  background-color: white;
+  border-radius: 20px;
+  padding: 40px;
+  margin-bottom: 40px;
+}
+
+.card-morado {
+  background-color: var(--morado);
+  color: white;
+
+  min-width: 30%;
+}
+
+.card-morado-claro {
+  background-color: var(--morado-claro);
+  color: white;
+    min-width: 30%;
+
+
+}
+
+.card-morado p,
+.card-morado-claro p,
+.card-morado ul,
+.card-morado-claro ul {
+  color: var(--amarillo);
+  margin-bottom: 0;
+}
+
+.card-morado h5,
+.card-morado-claro h5 {
+  color: white;
+  font-weight: bold;
+}
+
+.btn-warning {
+  font-weight: bold;
+}
+
+ul {
+  padding-left: 20px;
+}
+
+.card-img-container {
+  padding: 15px;
+  text-align: center;
+}
+
+.card-img-container img {
+  width: 100%;
+  height: auto;
+  border-radius: 10px;
+}
+
+  </style>
+</head>
+<body>
+
+  <!-- Top Bar -->
+  <div class="topbar">
+    <div><h2><strong>Credix</strong></h2></div>
+    <input type="text" placeholder="Buscar..." />
+    <div>👤 Iniciar Sesión</div>
+  </div>
+
+  <!-- Sidebar -->
+  <div class="sidebar">
+    <h2>Menú</h2>
+    <ul>
+      <li><a href="#Inicio">Inicio</a></li>
+      <li><a href="#Historia">Historia</a></li>
+      <li><a href="#Tarjetas">Tarjetas de Crédito</a></li>
+      <li><a href="#Solicitudes">Solicitudes</a></li>
+      <li><a href="#Ayuda">Ayuda y Contacto</a></li>
+    </ul>
+  </div>
+
+  <!-- Contenedor principal para contenido -->
+  <div class="main">
+
+    <!-- Sección Inicio -->
+   <!-- Sección Inicio -->
+<section id="Inicio" class="content">
+
+  <div class="card-welcome">
+    <h2>Bienvenido a Credix</h2>
+    <p>Gestiona tus finanzas de forma segura y rápida</p>
+    <button class="btn btn-warning"><a href="#Historia">Ver más</a></button>
+  </div>
+
+  <div class="dashboard-cards">
+    <div class="card">
+      <h3>Saldo en Cuenta</h3>
+      <h4>S/. 8,500.00</h4>
+    </div>
+    <div class="card">
+      <h3>Préstamos Activos</h3>
+      <h4>2</h4>
+    </div>
+    <div class="card">
+      <h3>Ahorro Mensual</h3>
+      <h4>S/. 1,200.00</h4>
+    </div>
+  </div>
+
+  <!-- Sección Soluciones -->
+  <div class="soluciones">
+    <h2>Conoce nuestras <strong>soluciones digitales.</strong></h2>
+    <div class="tarjetas-soluciones">
+      <div class="tarjeta">
+        <h4>Tienes el Control</h4>
+        <p>Monitorea tus ingresos y gastos al instante desde nuestra app.</p>
+        <a href="#">DESCÚBRELO &gt;</a>
+      </div>
+      <div class="tarjeta">
+        <h4>Giros Grátis</h4>
+        <p>Envía y recibe dinero entre cuentas Credix y otros bancos grátis</p>
+        <a href="#">EMPIEZA HOY &gt;</a>
+      </div>
+      <div class="tarjeta">
+        <h4>Mi alcancía</h4>
+        <p>Activa metas automáticas de ahorro y alcanza tus sueños.</p>
+        <a href="#">ACTÍVALO AQUÍ &gt;</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="extra-info">
+    <div class="caja-info segura">
+      <h4>🔐 Credix Seguro</h4>
+      <p>Protegemos tus datos con la mejor tecnología en ciberseguridad.</p>
+      <img class="imagen-segura" src="https://www.esic.edu/sites/default/files/2024-07/que%20es%20la%20ciberseguridad.jpg" alt="Ciberseguridad" />
+    </div>
+    <div class="caja-info vip">
+      <h4>✈️ Credix Elite</h4>
+      <p>Accede a salas VIP en aeropuertos de todo el mundo sin complicaciones.</p>
+      <img class="imagen-vip" src="https://aero-naves.com/wp-content/uploads/2023/10/Apt-LIM-sala-Hanaq-piso-2-RicardoDelpiano.jpg" alt="Sala VIP" />
+    </div>
+  </div>
+
+</section>
+
+
+    <!-- Sección Solicitudes -->
+    <section id="Solicitudes" class="content">
+
+      <!-- Franja superior -->
+      <div class="franja-morada">
+        <div class="franja-contenido">
+          <h1>¡SOLICITA TU PRÉSTAMO AQUÍ!</h1>
+          <img src="https://d14bodb4yrsx8y.cloudfront.net/assets/img/prestamo_6.62b271b.png" alt="Préstamo" />
+        </div>
+      </div>
+
+      <!-- Formulario -->
+      <div class="prestamo-form">
+        <h3><strong>INGRESA TUS DATOS</strong></h3>
+        <form>
+          <div class="mb-3">
+            <label for="nombre">Nombre completo</label>
+            <input type="text" class="form-control" id="nombre" placeholder="Escribe tu nombre" required />
+          </div>
+
+          <div class="mb-3">
+            <label for="dni">DNI</label>
+            <input type="text" class="form-control" id="dni" placeholder="Número de DNI" required />
+          </div>
+
+          <div class="mb-3">
+            <label for="monto">Monto solicitado (S/)</label>
+            <input type="number" class="form-control" id="monto" placeholder="Ejemplo: 5000" required />
+          </div>
+
+          <div class="mb-3">
+            <label for="plazo">Plazo (meses)</label>
+            <select class="form-control" id="plazo" required>
+              <option value="">Selecciona</option>
+              <option value="6">6 meses</option>
+              <option value="12">12 meses</option>
+              <option value="18">18 meses</option>
+              <option value="24">24 meses</option>
+            </select>
+          </div>
+
+          <div class="mb-3">
+            <label for="email">Correo electrónico</label>
+            <input type="email" class="form-control" id="email" placeholder="correo@ejemplo.com" required />
+          </div>
+
+          <button type="submit" class="btn-enviar">Enviar</button>
+        </form>
+      </div>
+
+    </section>
+  </div>
+
+  <!--AYUDA Y CONTACTO--> 
+  <section id="Ayuda" class="content">
+  <header class="ayuda-header">
+    Centro de ayuda
+  </header>
+
+  <h2 class="ayuda-titulo">Tengo una emergencia</h2>
+
+  <div class="ayuda-contenido">
+    <!-- Tarjetas -->
+    <div class="ayuda-tarjetas">
+      <div class="ayuda-tarjeta">
+        <h3>Tengo una emergencia</h3>
+        <p>¿Te robaron o perdiste tus tarjetas? ¿Fuiste víctima de un asalto? ¿Crees que robaron tus claves?</p>
+        <a href="#Ayuda">TE AYUDAMOS →</a>
+      </div>
+
+      <div class="ayuda-tarjeta">
+        <h3>Protección contra fraudes</h3>
+        <p>¿Quieres saber cómo proteger tu tarjeta de crédito o cómo comprar en línea de forma segura?</p>
+        <a href="#">TE ACONSEJAMOS →</a>
+      </div>
+    </div>
+
+    <!-- Preguntas frecuentes sin JS -->
+    <div class="ayuda-faqs">
+      <div class="ayuda-faq-box">
+        <h4>LO MEJOR PARA NUESTROS CLIENTES!</h4>
+
+        <details class="ayuda-faq-item">
+          <summary>¿Cómo bloquear mi Tarjeta?</summary>
+          <div>Puedes bloquear tu tarjeta desde la app en la sección de Seguridad o llamando a nuestro número de atención al cliente.</div>
+        </details>
+
+        <details class="ayuda-faq-item">
+          <summary>¿Cómo saber si tengo una deuda?</summary>
+          <div>Ingresa a tu banca en línea o app móvil y revisa la sección de movimientos o deudas pendientes.</div>
+        </details>
+
+        <details class="ayuda-faq-item">
+          <summary>¿Cómo aprender a leer mi Estado de Cuenta?</summary>
+          <div>Te ofrecemos una guía visual paso a paso en nuestra web. También puedes pedir asesoría por chat.</div>
+        </details>
+
+        <details class="ayuda-faq-item">
+          <summary>¿Cómo verificar el estado de mi reclamo?</summary>
+          <div>En la sección "Mis reclamos" dentro de la app puedes ver el estado y detalles del proceso.</div>
+        </details>
+
+        <details class="ayuda-faq-item">
+          <summary>¿Qué es una Cuenta Simple?</summary>
+          <div>Es una cuenta sin costo de mantenimiento, ideal para comenzar a ahorrar o manejar tu dinero digitalmente.</div>
+        </details>
+
+        <details class="ayuda-faq-item">
+          <summary>¿Qué proceso seguir para cambiar mis datos?</summary>
+          <div>Puedes actualizar tus datos desde la app en “Perfil” o acudiendo a una de nuestras agencias.</div>
+        </details>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+<!--HISTORIA-->
+
+  <section id="Historia" class="content">
+  <div class="Historia">
+    <div class="credix-historia-content">
+      <div class="credix-historia-texto">
+        <h2>Nuestra Historia</h2>
+        <p>Credix nació con el objetivo de brindar soluciones financieras accesibles, confiables y modernas. Desde nuestros inicios, hemos crecido con nuestros clientes, adaptándonos a sus necesidades y evolucionando en un mundo financiero cambiante.</p>
+        <p>Nuestro compromiso es ofrecer herramientas financieras que ayuden a mejorar la calidad de vida de las personas, con un enfoque humano y tecnológico.</p>
+      </div>
+      <div class="credix-historia-img">
+        <img src="https://doctorsol.pe/blog/wp-content/uploads/2024/11/c2d36-prestamos-en-linea-peru.png" alt="Historia Credix" />
+      </div>
+    </div>
+
+    <div class="credix-mision-vision-box">
+      <div class="credix-mision-vision-grid">
+        <div class="credix-mision-vision-item">
+          <h3>Misión</h3>
+          <p>Brindar servicios financieros innovadores y confiables que impulsen el crecimiento económico de nuestros clientes, fomentando la inclusión y la educación financiera.</p>
+        </div>
+        <div class="credix-mision-vision-item">
+          <h3>Visión</h3>
+          <p>Ser la institución financiera líder en soluciones digitales, reconocida por su compromiso social, su ética y su impacto positivo en la vida de las personas.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!--tarjetas de credito-->
+
+<section id="Tarjetas" class="content">
+  <!-- Imagen portada -->
+  <div class="banda-superior">
+    <img src="TARJETAS/PORTADA.png" class="portada-img" >
+  </div>
+
+  <!-- Título -->
+  <h2 class="mb-4 text-white text-center">Escoge tu tarjeta ideal</h2>
+
+  <!-- Contenedor blanco -->
+  <div class="tarjetas-wrapper">
+    <div class="row row-cols-1 row-cols-md-3 g-4">
+
+        <!-- Tarjeta 1 -->
+        <div class="col">
+          <div class="card h-100 shadow-sm card-morado">
+            <div class="card-img-container">
+              <img src="TARJETAS/TARJETA CLÁSICA.png" alt="Tarjeta Classic">
+            </div>
+            <div class="card-body">
+              <h5 class="card-title">Credix Classic</h5>
+              <p class="card-text">Evita llevar grandes cantidades de efectivo o preocuparte por tener el cambio justo. Usa la tarjeta más popular del país para proteger tu dinero sin costos ni intereses.</p>
+            </div>
+            <div class="card-footer bg-transparent border-0">
+              <button class="btn btn-warning w-100">Solicitar</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tarjeta 2 -->
+        <div class="col">
+          <div class="card h-100 shadow-sm card-morado-claro">
+            <div class="card-img-container">
+              <img src="TARJETAS/TARJETA ORO.png" alt="Tarjeta Gold">
+            </div>
+            <div class="card-body">
+              <h5 class="card-title">Credix Gold</h5>
+              <p class="card-text">Protege tus compras, extiende garantías y accede a efectivo en emergencias. Más ventajas para tu día a día.</p>
+            </div>
+            <div class="card-footer bg-transparent border-0">
+              <button class="btn btn-warning w-100">Solicitar</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tarjeta 3 -->
+        <div class="col">
+          <div class="card h-100 shadow-sm card-morado">
+            <div class="card-img-container">
+              <img src="TARJETAS/TARJETA BLACK.png" alt="Tarjeta Black">
+            </div>
+            <div class="card-body">
+              <h5 class="card-title">Credix Black</h5>
+              <ul>
+                <li>6,000 Millas de bienvenida</li>
+                <li>Membresía anual S/400 (GRATIS si consumes S/3,500 al mes)</li>
+                <li>1.25 Millas por cada 1 USD</li>
+                <li>Priority Pass + 2 invitados</li>
+                <li>Delivery gratis</li>
+              </ul>
+            </div>
+            <div class="card-footer bg-transparent border-0">
+              <button class="btn btn-warning w-100">Solicitar</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tarjeta 4 -->
+        <div class="col">
+          <div class="card h-100 shadow-sm card-morado-claro">
+            <div class="card-img-container">
+              <img src="TARJETAS/TARJETA PLATINUM.png" alt="Tarjeta Platinum">
+            </div>
+            <div class="card-body">
+              <h5 class="card-title">Credix Platinum</h5>
+              <ul>
+                <li>3,000 Millas de bienvenida</li>
+                <li>Membresía anual S/350 (GRATIS si consumes S/1,200 al mes)</li>
+                <li>1 Milla por cada 1 USD</li>
+                <li>Delivery gratis</li>
+              </ul>
+            </div>
+            <div class="card-footer bg-transparent border-0">
+              <button class="btn btn-warning w-100">Solicitar</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tarjeta 5 -->
+        <div class="col">
+          <div class="card h-100 shadow-sm card-morado">
+            <div class="card-img-container">
+              <img src="TARJETAS/TARJETA LIGTH.png" alt="Tarjeta Light">
+            </div>
+            <div class="card-body">
+              <h5 class="card-title">Credix Light</h5>
+              <ul>
+                <li>Sin consumo mínimo</li>
+                <li>Membresía anual GRATIS</li>
+                <li>Delivery gratis</li>
+              </ul>
+            </div>
+            <div class="card-footer bg-transparent border-0">
+              <button class="btn btn-warning w-100">Solicitar</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tarjeta 6 -->
+        <div class="col">
+          <div class="card h-100 shadow-sm card-morado-claro">
+            <div class="card-img-container">
+              <img src="TARJETAS/TARJETA INFINITE.png" alt="Tarjeta Infinite">
+            </div>
+            <div class="card-body">
+              <h5 class="card-title">Credix Infinite</h5>
+              <ul>
+                <li>15,000 Puntos Qore</li>
+                <li>Membresía anual S/500 (GRATIS si consumes S/5,000 al mes)</li>
+                <li>Hasta 3 Puntos Qore por cada 1 USD</li>
+                <li>Priority Pass + 4 invitados</li>
+                <li>Delivery gratis</li>
+              </ul>
+            </div>
+            <div class="card-footer bg-transparent border-0">
+              <button class="btn btn-warning w-100">Solicitar</button>
+            </div>
+          </div>
+        </div>
+
+    </div>
+  </div>
+</section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-container">
+      <div class="footer-column">
+        <h5>Créditos</h5>
+        <ul>
+          <li><a href="#Solicitudes">Ver créditos</a></li>
+          <li><a href="#Tarjetas">Mis Tarjetas</a></li>
+          <li><a href="#Tarjetas">Beneficios</a></li>
+        </ul>
+      </div>
+      <div class="footer-column">
+        <h5>Ayuda</h5>
+        <ul>
+          <li><a href="#Ayuda">Contáctanos</a></li>
+          <li><a href="#Ayuda">Preguntas frecuentes</a></li>
+          <li><a href="#Ayuda">Soporte técnico</a></li>
+        </ul>
+      </div>
+      <div class="footer-column">
+        <h5>Redes Sociales</h5>
+        <ul>
+          <li><a href="#Inicio">Facebook</a></li>
+          <li><a href="#Inicio">Instagram</a></li>
+          <li><a href="#Inicio">Twitter</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      © Estefany Encarnación, Carolina Muñoz, Brenda Ticlia y Giasel Violeta | Credix - 2025 | Todos los derechos reservados.</div>
+  </footer>
+
+</body>
+</html>
