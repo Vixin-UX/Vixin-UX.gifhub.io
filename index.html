@@ -30,12 +30,12 @@
       height: 60px;
       width: calc(100% - 250px); /* espacio menos el sidebar */
       color: white;
-      padding: 0 20px;
+      padding: 0 70px;
       display: flex;
       align-items: center;
       justify-content: flex-start;
       margin-left: 250px; /* Para evitar que el topbar se meta debajo del sidebar */
-      position: relative; 
+      position: relative; /* No sticky */
       z-index: 1001; /* Se asegura de estar sobre el contenido si es necesario */
       
     }
@@ -109,22 +109,17 @@
       background-color: var(--gris-claro);
       min-height: 100vh;
     }
+.card-welcome {
+  width: 100vw;
+  margin-left: calc(-50vw + 50%);
+  margin-bottom: 40px;
+  padding: 50px 40px;
+  background-color: var(--morado);
+  color: white;
+  text-align: center;
+}
 
-  
 
- .card-welcome {
-      background-color: var(--morado);
-      color: white;
-      border-radius: 15px;
-      padding: 50px;
-      height: 240px;
-      width: 1140px;
-      margin-top: -10px;
-      margin-left: -70px;
-      text-align: center;
-      margin-bottom: 30px;
-
-    }
 
     .dashboard-cards {
       display: grid;
@@ -132,7 +127,7 @@
       gap: 20px;
       padding: auto;
       margin-bottom: 40px;
-      margin-left: -70px;
+      margin-left: auto;
       height: 150px;
       width: 1140px;
     }
@@ -185,20 +180,23 @@
 
     .soluciones {
       background-color: var(--morado);
-      min-width: 130%;
-      color: white;
-      padding: 40px 20px;
-      margin-left: -90px;
-      text-align: center;
+  color: white;
+  padding: 60px 20px;
+  border-radius: 15px;
+  margin: 30px auto;
+  width: 100vw;
+  margin-left: calc(-50vw + 50%);
+  text-align: center;
+      
     }
+
 
         .tarjetas-soluciones {
       display: flex;
       flex-wrap: wrap;
-      justify-content: space-between;
-      gap: 40px;
-    
-      padding: 0 20px;
+      justify-content: center;
+      gap: 100px;
+      padding:  20px;
     }
 
     .tarjeta {
@@ -335,11 +333,17 @@
       padding-top: 20px;
     }
 
+a {
+  color: var(--morado);
+  text-decoration: none;
+}
 
-
-
-
-
+a:hover {
+  color: white;
+  background-color: var(--morado-claro);
+  padding: 5px 10px;
+  border-radius: 5px;
+}
 
 
 
@@ -420,7 +424,7 @@
   display: block;
 }
 
-/* Si no se ha clicado ningún enlace aún, mostrará la sección #Inicio */
+/* Si no se ha clicado ningún enlace aún, mostrar la sección #Inicio */
 body:not(:has(:target)) #Inicio {
   display: block;
 }
@@ -429,7 +433,6 @@ body:not(:has(:target)) #Inicio {
 
 /*AYUDA Y CONTACTO*/
 
-/* Estilos para la sección de ayuda y contacto */
 #Ayuda {
   background-color: var(--morado);
   margin-top: -750px;
@@ -733,7 +736,6 @@ ul {
   <!-- Contenedor principal para contenido -->
   <div class="main">
 
-    <!-- Sección Inicio -->
    <!-- Sección Inicio -->
 <section id="Inicio" class="content">
 
@@ -765,17 +767,17 @@ ul {
       <div class="tarjeta">
         <h4>Tienes el Control</h4>
         <p>Monitorea tus ingresos y gastos al instante desde nuestra app.</p>
-        <a href="#">DESCÚBRELO &gt;</a>
+        <a href="#Ayuda">DESCÚBRELO &gt;</a>
       </div>
       <div class="tarjeta">
         <h4>Giros Grátis</h4>
         <p>Envía y recibe dinero entre cuentas Credix y otros bancos grátis</p>
-        <a href="#">EMPIEZA HOY &gt;</a>
+        <a href="#Tarjetas">EMPIEZA HOY &gt;</a>
       </div>
       <div class="tarjeta">
         <h4>Mi alcancía</h4>
         <p>Activa metas automáticas de ahorro y alcanza tus sueños.</p>
-        <a href="#">ACTÍVALO AQUÍ &gt;</a>
+        <a href="#Tarjetas">ACTÍVALO AQUÍ &gt;</a>
       </div>
     </div>
   </div>
@@ -1080,47 +1082,6 @@ ul {
   </div>
 </section>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
   <!-- Footer -->
   <footer>
     <div class="footer-container">
@@ -1150,7 +1111,7 @@ ul {
       </div>
     </div>
     <div class="footer-bottom">
-      © Estefany Encarnación, Carolina Muñoz, Brenda Ticlia, Raquel Salinas y Giasel Violeta | Credix - 2025 | Todos los derechos reservados.</div>
+      © Estefany Encarnación, Carolina Muñoz, Brenda Ticlia y Giasel Violeta | Credix - 2025 | Todos los derechos reservados.</div>
   </footer>
 
 </body>
